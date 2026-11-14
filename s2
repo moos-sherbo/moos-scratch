@@ -1,0 +1,7 @@
+echo MOOSWAKE-BEGIN
+date
+termux-wake-lock; echo WAKELOCK-OK
+pkill sshd; sleep 1; sshd; sleep 1; ps -ef | grep sshd | grep -v grep
+ss -tlnp 2>/dev/null | grep 8022 || netstat -tlnp 2>/dev/null | grep 8022 || echo NO-LISTEN-INFO
+curl -s --max-time 10 -o /dev/null -w "egress:%{http_code}\n" https://api.github.com
+echo MOOSWAKE-END
